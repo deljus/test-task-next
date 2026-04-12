@@ -1,0 +1,37 @@
+@import "tailwindcss" source("../../");
+
+@theme {
+  /* main text color */
+  --color-body: var(--color-stone-600);
+  --color-body-subtle: var(--color-stone-500);
+
+  /* text heading colors */
+  --color-heading: var(--color-stone-900);
+
+  /* used for custom brand colors */
+  --color-brand-subtle: var(--color-stone-200);
+  --color-brand: var(--color-stone-950);
+  --color-brand-strong: var(--color-stone-900);
+
+  /* used for status colors */
+  --color-success: var(--color-green-700);
+  --color-success-strong: var(--color-green-900);
+  --color-danger: var(--color-red-700);
+  --color-danger-strong: var(--color-red-900);
+  --color-warning-subtle: var(--color-orange-600);
+  --color-warning: var(--color-orange-900);
+  --color-yellow: var(--color-yellow-400);
+  --color-disabled: var(--color-stone-400);
+  --color-purple: var(--color-purple-600);
+  --color-cyan: var(--color-cyan-600);
+  --color-indigo: var(--color-indigo-600);
+  --color-pink: var(--color-pink-600);
+  --color-lime: var(--color-lime-600);
+
+  /* used for brand colors */
+  --color-brand-softer: var(--color-blue-50);
+  --color-brand-soft: var(--color-blue-100);
+  --color-brand: var(--color-blue-700);
+  --color-brand-medium: var(--color-blue-200);
+  --color-brand-strong: var(--color-blue-800);
+}
