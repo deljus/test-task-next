@@ -1,4 +1,0 @@
-const withForm(Component) => (props) {
-
-    
-}

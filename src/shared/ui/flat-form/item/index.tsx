@@ -1,8 +1,19 @@
 import { ErrorMessage } from "@hookform/error-message";
-import type { ReactElement, ReactNode } from "react";
-import { useId } from "react";
+import { isValidElement, cloneElement, useId, Children } from "react";
 import { useFormContext } from "react-hook-form";
 
+import type { ReactElement, ReactNode } from "react";
+import type { UseFormRegisterReturn } from "react-hook-form";
+
+/**
+ A field for registering a control in a React Hook Form in the style of an AntD form.
+ https://ant.design/components/form
+
+ Example:
+  <FormItem label="user" name="user">
+    <Input />
+  </FormItem>
+*/
 interface FieldProps {
   /** Input name props */
   name: string;
@@ -10,6 +21,10 @@ interface FieldProps {
   label: string;
   /** childs */
   children: ReactNode;
+}
+
+interface SharedProps extends UseFormRegisterReturn {
+  id: string;
 }
 
 function FormItem({ children, name, label }: FieldProps): ReactElement {
@@ -25,7 +40,11 @@ function FormItem({ children, name, label }: FieldProps): ReactElement {
       >
         {label}
       </label>
-      {children}
+      {Children.map(children, (child) =>
+        isValidElement<SharedProps>(child)
+          ? cloneElement(child, { id: uid, ...methods.register(name) })
+          : child,
+      )}
       <div className="h-4 text-danger">
         <ErrorMessage
           errors={errors}
