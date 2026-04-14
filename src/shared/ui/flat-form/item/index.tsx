@@ -2,7 +2,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { isValidElement, cloneElement, useId, Children } from "react";
 import { useFormContext } from "react-hook-form";
 
-import type { ReactElement, ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 /**
@@ -27,7 +27,7 @@ interface SharedProps extends UseFormRegisterReturn {
   id: string;
 }
 
-function FormItem({ children, name, label }: FieldProps): ReactElement {
+function FormItem({ children, name, label }: FieldProps) {
   const methods = useFormContext();
   const uid = useId();
 
