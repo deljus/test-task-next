@@ -21,6 +21,7 @@ const users = faker.helpers.multiple(createRandomUser, {
 });
 
 const SimpleTable = () => (
+  <div className="p-4">
   <Table>
     <Header>
       <Column>Name</Column>
@@ -39,15 +40,14 @@ const SimpleTable = () => (
       )}
     </Body>
   </Table>
+  </div>
 );
 
 const meta = {
   title: "Components/Table",
   component: SimpleTable,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   parameters: {
-    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: "fullscreen",
   },
 } satisfies Meta<typeof Header>;

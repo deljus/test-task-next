@@ -38,7 +38,7 @@ function SortableColumn({
 
   return (
     <th scope="col" className={twMerge("px-6 py-3 font-medium", className)}>
-      <div className="flex justify-beetwen">
+      <div className="flex justify-between">
         <div>{children}</div>
         <button onClick={handleClick}>
           <Icon className="w-4 h-4" />

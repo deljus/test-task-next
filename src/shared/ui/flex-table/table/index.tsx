@@ -9,7 +9,7 @@ function Table({ className, children }: TableProps) {
   return (
     <div
       className={twMerge(
-        "relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default",
+        "relative overflow-x-auto bg-neutral-primary-soft shadow-sm rounded border border-default",
         className,
       )}
     >
