@@ -1,49 +1,57 @@
 import axios from "axios";
+import { ENV } from "@/shared/config";
+import { TokenStorage } from "@/shared/lib/token-storage";
+import type { Tokens } from "@/shared/lib/token-storage";
 
 const clientApi = axios.create({
-  baseURL: 'https://your.api.base.url',
+  baseURL: ENV.API_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
-clientApi.interceptors.request.use(request => {
-  const accessToken = localStorage.getItem('accessToken');
-  if (accessToken) {
-    request.headers['Authorization'] = `Bearer ${accessToken}`;
-  }
-  return request;
-}, error => {
-  return Promise.reject(error);
-});
+clientApi.interceptors.request.use(
+  (request) => {
+    if (TokenStorage.hasToken()) {
+      const { accessToken } = TokenStorage.get();
+      request.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
+    return request;
+  },
+  (error) => Promise.reject(error),
+);
 
 clientApi.interceptors.response.use(
-  response => response, 
-  async error => {
+  (response) => response,
+  async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (
+      error.response.status === 401 &&
+      !originalRequest._retry &&
+      TokenStorage.hasToken()
+    ) {
       originalRequest._retry = true;
+
       try {
-        const refreshToken = localStorage.getItem('refreshToken'); 
-        
-        const response = await axios.post('https://your.auth.server/refresh', {
+        const { refreshToken } = TokenStorage.get();
+
+        const response = await axios.post<Tokens>("/refresh", {
           refreshToken,
         });
-        const { accessToken, refreshToken: newRefreshToken } = response.data;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', newRefreshToken);
-        clientApi.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-        return clientApi(originalRequest); 
+        const tokens = response.data;
+        TokenStorage.set(tokens);
+        clientApi.defaults.headers.common["Authorization"] =
+          `Bearer ${tokens.accessToken}`;
+        return clientApi(originalRequest);
       } catch (refreshError) {
-        console.error('Token refresh failed:', refreshError);
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/login';
+        console.error("Token refresh failed:", refreshError);
+        TokenStorage.clear();
+        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }
     return Promise.reject(error);
-  }
+  },
 );
 
-export { clientApi }
+export { clientApi };
