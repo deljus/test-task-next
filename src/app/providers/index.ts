@@ -1,1 +1,1 @@
-export { RoutesProvider } from './routes';
+export { QueriesProvider } from './queries'

@@ -1,8 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from 'react-router'
 import "./css/styles.css";
 
-import { RoutesProvider } from "./providers";
+import { QueriesProvider } from "./providers";
+import { LoginPage } from "@/pages/auth/login";
 
 function startApp(): void {
   const rootElement = document.getElementById("root");
@@ -13,7 +15,16 @@ function startApp(): void {
 
   createRoot(rootElement).render(
     <StrictMode>
-      <RoutesProvider />
+      <QueriesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/auth">
+              <Route path="login" element={<LoginPage />} />
+
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueriesProvider>
     </StrictMode>,
   );
 }

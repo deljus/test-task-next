@@ -1,11 +1,11 @@
-interface iStorageService<T> {
+export interface StorageService<T> {
   get(): T | null;
   set(value: T): void;
   clear(): void;
   hasToken(): boolean;
 }
 
-export class WebStorage<T extends object> implements iStorageService<T> {
+export class WebStorage<T extends object> implements StorageService<T> {
   private readonly storage: Storage;
   private readonly tokenKey: string;
 

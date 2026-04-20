@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactElement, ReactNode } from "react";
+import type { HTMLProps, ReactElement, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 const COLORS = {
@@ -30,7 +30,7 @@ const DISPLAYS = {
     "rounded-full box-border border shadow-xs focus:ring-2 font-medium focus:outline-none cursor-pointer",
 };
 
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   /** Custom style className */
   className?: string;
   /** What background color to use */

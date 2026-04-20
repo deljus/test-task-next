@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ENV } from "@/shared/config";
-import { TokenStorage } from "@/shared/lib/token-storage";
-import type { Tokens } from "@/shared/lib/token-storage";
+import { TokenStorage } from "@/shared/lib/storages/token-storage";
+import type { Tokens } from "@/shared/lib/storages/token-storage";
 
 const clientApi = axios.create({
   baseURL: ENV.API_URL,
