@@ -20,9 +20,9 @@ export default defineConfig({
   root: "./src/app",
   plugins: [
     react(),
-    babel({
-      presets: [reactCompilerPreset()],
-    }),
+    // babel({
+    //   presets: [reactCompilerPreset()],
+    // }),
     tsconfigPaths(),
     tailwindcss(),
   ],

@@ -31,7 +31,6 @@ function FormItem({ children, name, label }: FieldProps) {
   const methods = useFormContext();
   const uid = useId();
 
-  const { errors } = methods.formState;
   return (
     <div>
       <label
@@ -47,9 +46,11 @@ function FormItem({ children, name, label }: FieldProps) {
       )}
       <div className="h-4 text-danger">
         <ErrorMessage
-          errors={errors}
+          errors={methods.formState.errors}
           name={name}
-          render={({ message }) => <>{message}</>}
+          render={({ message, messages }) => (
+            <>{JSON.stringify({ message, messages })}</>
+          )}
         />
       </div>
     </div>

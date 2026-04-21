@@ -5,9 +5,7 @@ const validateSchema = yup.object({
     .string()
     .email("Не корректный email")
     .required("Поле не может быть пустым"),
-  password: yup
-    .string()
-    .required("Поле не может быть пустым"),
+  password: yup.string().required("Поле не может быть пустым"),
 });
 
-export { validateSchema }
+export { validateSchema };

@@ -1,4 +1,4 @@
-import type { HTMLProps, ReactElement, ReactNode } from "react";
+import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 const COLORS = {
@@ -30,13 +30,13 @@ const DISPLAYS = {
     "rounded-full box-border border shadow-xs focus:ring-2 font-medium focus:outline-none cursor-pointer",
 };
 
-export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
+export interface ButtonProps extends ComponentProps<"button"> {
   /** Custom style className */
   className?: string;
   /** What background color to use */
   color?: keyof typeof COLORS;
   /** Size button */
-  size?: keyof typeof SIZES;
+  sizeBtn?: keyof typeof SIZES;
   /** Button type */
   display?: keyof typeof DISPLAYS;
   /** Button contents */
@@ -49,7 +49,7 @@ function Button({
   children,
   className,
   color = "brand",
-  size = "medium",
+  sizeBtn = "medium",
   display = "default",
   onClick,
   ...rest
@@ -58,7 +58,7 @@ function Button({
     <button
       className={twMerge(
         COLORS[color],
-        SIZES[size],
+        SIZES[sizeBtn],
         DISPLAYS[display],
         className,
       )}
