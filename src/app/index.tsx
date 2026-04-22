@@ -1,9 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter, Routes, Route } from "react-router";
+import { AuthLayout } from "@/widgets/layouts/auth";
 import "./css/styles.css";
 
-import { QueriesProvider } from "./providers";
+import { QueriesProvider, I18nProvider } from "./providers";
 import { LoginPage } from "@/pages/auth/login";
 
 function startApp(): void {
@@ -15,16 +16,17 @@ function startApp(): void {
 
   createRoot(rootElement).render(
     <StrictMode>
-      <QueriesProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/auth">
-              <Route path="login" element={<LoginPage />} />
-
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </QueriesProvider>
+      <I18nProvider>
+        <QueriesProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/auth" Component={AuthLayout}>
+                <Route path="login" Component={LoginPage} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </QueriesProvider>
+      </I18nProvider>
     </StrictMode>,
   );
 }
