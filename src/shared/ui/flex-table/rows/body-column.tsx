@@ -1,11 +1,11 @@
 import type { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface RowProps extends PropsWithChildren {
+interface BodyColumnProps extends PropsWithChildren {
   className?: string;
 }
 
-function Row({ className, children }: RowProps) {
+function BodyColumn({ className, children }: BodyColumnProps) {
   return (
     <td scope="col" className={twMerge("px-6 py-4", className)}>
       {children}
@@ -13,4 +13,4 @@ function Row({ className, children }: RowProps) {
   );
 }
 
-export { Row };
+export { BodyColumn };

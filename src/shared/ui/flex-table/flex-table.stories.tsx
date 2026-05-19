@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Fragment } from "react";
 import { faker } from "@faker-js/faker";
 
-import { Table, Column, SortableColumn, Header, Body, Row } from "./index";
+import { Table, Column, SortableColumn, Header, Body, BodyColumn } from "./index";
 
 function createRandomUser() {
   return {
@@ -32,10 +32,10 @@ const SimpleTable = () => (
     <Body<ReturnType<typeof createRandomUser>> data={users}>
       {({ userId, username, email, birthdate, registeredAt }) => (
         <Fragment key={userId}>
-          <Row>{username}</Row>
-          <Row>{email}</Row>
-          <Row>{birthdate.toDateString()}</Row>
-          <Row>{registeredAt.toDateString()}</Row>
+          <BodyColumn>{username}</BodyColumn>
+          <BodyColumn>{email}</BodyColumn>
+          <BodyColumn>{birthdate.toDateString()}</BodyColumn>
+          <BodyColumn>{registeredAt.toDateString()}</BodyColumn>
         </Fragment>
       )}
     </Body>

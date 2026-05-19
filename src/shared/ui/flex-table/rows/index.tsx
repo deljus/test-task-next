@@ -1,1 +1,1 @@
-export { Row } from './row'
+export { BodyColumn } from './body-column'

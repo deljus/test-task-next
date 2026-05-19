@@ -44,13 +44,11 @@ function FormItem({ children, name, label }: FieldProps) {
           ? cloneElement(child, { id: uid, ...methods.register(name) })
           : child,
       )}
-      <div className="h-4 text-danger">
+      <div className="h-4 text-danger text-sm">
         <ErrorMessage
           errors={methods.formState.errors}
           name={name}
-          render={({ message, messages }) => (
-            <>{JSON.stringify({ message, messages })}</>
-          )}
+          render={({ message }) => <>{message}</>}
         />
       </div>
     </div>
