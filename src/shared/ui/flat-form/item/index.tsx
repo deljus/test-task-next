@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 
 import type { ReactNode } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
 /**
  A field for registering a control in a React Hook Form in the style of an AntD form.
@@ -15,6 +16,8 @@ import type { UseFormRegisterReturn } from "react-hook-form";
   </FormItem>
 */
 interface FieldProps {
+  /** Field className */
+  className?: string;
   /** Input name props */
   name: string;
   /** Field label name */
@@ -27,15 +30,15 @@ interface SharedProps extends UseFormRegisterReturn {
   id: string;
 }
 
-function FormItem({ children, name, label }: FieldProps) {
+function FormItem({ children, name, label, className }: FieldProps) {
   const methods = useFormContext();
   const uid = useId();
 
   return (
-    <div>
+    <div className={twMerge("mb-2", className)}>
       <label
         htmlFor={uid}
-        className="block mb-2.5 text-sm font-medium text-heading"
+        className="block mb-1 text-sm font-medium text-heading"
       >
         {label}
       </label>
